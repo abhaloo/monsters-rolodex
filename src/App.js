@@ -17,6 +17,7 @@ class App extends Component {
       monsters: [],
       searchField: ''
     };
+
   }
 
   //Fetch monsters data from API, convert to JSON, then mount to DOM
@@ -25,6 +26,10 @@ class App extends Component {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => this.setState({monsters: users}))
+  }
+
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value })
   }
 
   render() {
@@ -39,11 +44,11 @@ class App extends Component {
       return (
         
         <div className="App">
-        
+          <h1> Monsters Rolodex </h1>
           
           <SearchBox 
             placeholder = "search monsters"
-            handleChange = {e => this.setState({ searchField: e.target.value })}  
+            handleChange = {this.handleChange}  
           />
           <CardList monsters={filteredMonsters}/> 
  
